@@ -92,16 +92,19 @@ If Copilot ignores your rules, refine the wording — more specific language ten
 
 ## Task 5 — copilot-setup-steps.yml
 
-Open `.github/copilot-setup-steps.yml`. Add a step to pre-install Gradle dependencies so the coding agent doesn't have to download them every time:
+Open `.github/copilot-setup-steps.yml`. Add or verify steps to pre-install dependencies needed for testing and browser automation:
 
 ```yaml
+- name: Install Playwright browsers
+  run: npx playwright install
+
 - name: Pre-fetch Gradle dependencies
   run: cd backend && ./gradlew dependencies --no-daemon
 ```
 
-Ask Copilot to explain why this speeds up the agent:
+Ask Copilot to explain why these steps are important:
 ```
-Why does pre-fetching Gradle dependencies in copilot-setup-steps.yml help the coding agent?
+Why are Playwright browsers and Gradle dependencies pre-installed in copilot-setup-steps.yml? How does this affect testing performance?
 ```
 
 ---
@@ -110,5 +113,5 @@ Why does pre-fetching Gradle dependencies in copilot-setup-steps.yml help the co
 
 - Instructions are most effective when they are **specific, verifiable, and include examples**
 - Negative instructions ("never use `any`") prevent common anti-patterns automatically
-- `copilot-setup-steps.yml` is your coding agent's CI environment — treat it like a Dockerfile
+- `copilot-setup-steps.yml` is your testing environment setup — treat it like a Dockerfile for CI/test machines
 - Both files are version-controlled: your team's Copilot settings travel with the code

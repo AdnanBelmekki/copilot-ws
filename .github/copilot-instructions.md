@@ -1,7 +1,20 @@
 # Copilot Instructions for the Webshop Project
 
-## Project Goal
-Build and extend a simple webshop application used in a GitHub Copilot showcase workshop. Favor clear, readable code and explain trade-offs when generating suggestions so participants can learn from the output.
+## What This File Teaches
+
+This `copilot-instructions.md` is designed to be a **teaching example** for GitHub Copilot workshops. It demonstrates:
+- How to encode project context into a persistent system prompt
+- How to define domain models, naming conventions, and architectural patterns
+- How to guide Copilot toward production-ready code and explanations
+- How instructions shape every completion without manual re-explanation
+
+Use this as a template for your own projects.
+
+---
+
+## Project Context
+
+This is a simple webshop application used in a GitHub Copilot workshop. Favor clear, readable code and explain trade-offs when generating suggestions so participants can learn from the output.
 
 **Stack:** Vite + React + TypeScript (frontend) · Kotlin + Spring Boot + H2 (backend)
 

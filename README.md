@@ -1,6 +1,6 @@
 # 🛒 Copilot Workshop: Webshop Showcase
 
-An interactive workshop that teaches GitHub Copilot features — **copilot-instructions**, **agents**, **skills**, and **MCP servers** — by building and extending a real webshop application.
+An interactive workshop that teaches GitHub Copilot features — **copilot-instructions**, **agents**, **skills**, **commands** (`/explain`, `/fix`, `/tests`), and **MCP servers** — using a real webshop application as the demonstration vehicle.
 
 **Stack:** Vite + React + TypeScript · Kotlin + Spring Boot · H2 Database
 
@@ -8,16 +8,31 @@ An interactive workshop that teaches GitHub Copilot features — **copilot-instr
 
 ## What you'll learn
 
-| Feature | What it does |
-|---------|-------------|
-| `copilot-instructions.md` | Shapes every completion with project-specific context |
-| Inline completions | Generate JSX, Kotlin services, and API calls from context |
-| `/explain`, `/fix`, `/tests` | Understand, repair, and test code with a single command |
-| `@workspace` | Cross-file understanding across the entire mono-repo |
-| Code review agent | Automated signal-to-noise PR review |
-| GitHub MCP server | Create issues, search code, manage PRs from chat |
-| Copilot coding agent | Assign an issue to Copilot and receive a PR |
-| `copilot-setup-steps.yml` | Configure the coding agent's environment |
+This workshop focuses on **Copilot features and patterns** you can apply to any project:
+
+| Feature | What it teaches |
+|---------|---------|
+| `copilot-instructions.md` | How to encode project knowledge into a persistent, reusable system prompt |
+| **Skills** (`.github/skills/`) | How to package domain knowledge into specialized personas (frontend-engineer, backend-engineer, designer) |
+| **Agents** (`.github/agents/`) | How to create autonomous task-runners (todo tracker, code review, etc.) |
+| **Inline completions** | How Copilot uses instructions + context to generate code suggestions |
+| **Chat commands** (`/explain`, `/fix`, `/tests`) | How to use Copilot for code understanding, debugging, and test generation |
+| **`@workspace`** | How to enable cross-file understanding in chat |
+| **Code review agent** | How to automate quality gates (bugs, logic errors, regressions) |
+| **Playwright MCP server** | How to connect Copilot to external tools (browser automation, testing) |
+| **`copilot-setup-steps.yml`** | How to pre-configure environments for automation |
+
+The **webshop** is a real-world codebase used to demonstrate these features in practice — a backend API, frontend UI, and database layer that creates a need for all the Copilot patterns.
+
+---
+
+## How to Use This Workshop
+
+**If you're learning Copilot features:** Complete Parts 01–04 sequentially. Each part focuses on a specific Copilot capability (instructions → skills → commands → agents/MCP). The webshop stubs are your vehicle for practice.
+
+**If you're setting up your own project:** Study how this project uses `copilot-instructions.md`, skills, and agents. Copy these patterns to your codebase — the webshop is a template, not the end goal.
+
+**Key mindset:** You're not building a finished webshop. You're learning **how to make Copilot effective** across the full stack. When you finish, you'll know how to apply these patterns to your own projects.
 
 ---
 
