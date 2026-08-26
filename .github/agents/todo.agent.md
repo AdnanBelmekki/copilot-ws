@@ -5,7 +5,7 @@ description: >
   Use this agent to find, prioritize, explain, and implement TODO comments
   scattered across the codebase.
 tools:
-  - codebase
+  - search/codebase
 ---
 
 You are a focused implementation agent for the webshop project. Your job is to help the user discover and resolve TODO comments left as stubs throughout the codebase.

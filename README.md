@@ -64,10 +64,10 @@ cd backend
 | Part | Topic | Time | Link |
 |------|-------|------|------|
 | 00 | Prerequisites & setup | Pre-read | [→](docs/workshop/00-prerequisites.md) |
-| 01 | Copilot Instructions | 15 min | [→](docs/workshop/01-copilot-instructions.md) |
+| 01 | Copilot Instructions | 20 min | [→](docs/workshop/01-copilot-instructions.md) |
 | 02 | Complete the Backend | 20 min | [→](docs/workshop/02-complete-the-backend.md) |
 | 03 | Wire the Frontend | 20 min | [→](docs/workshop/03-wire-the-frontend.md) |
-| 04 | Agents & Skills Demo | 10 min | [→](docs/workshop/04-agents-and-skills.md) |
+| 04 | Custom Prompts, Agents & MCP | 15 min | [→](docs/workshop/04-agents-and-skills.md) |
 
 ### Bonus Tasks (self-paced)
 

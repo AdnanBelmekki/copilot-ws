@@ -133,6 +133,10 @@ Just like the `@todo` agent, you can create custom reviewer agents for your team
 
 > 💡 **SDLC role:** Custom agents act as automated **Tech Leads, QA Engineers, and Domain Experts** — encoding your team's exact procedures into reusable agents.
 
+#### Agent Plugins & Extension Marketplaces
+
+Beyond building custom agents and skills in your repository, you can also explore **Agent Plugins** and extension marketplaces. These marketplaces offer downloadable, pre-packaged bundles of agents, skills, tools, and instructions tailored for specific tech stacks (such as Spring Boot, React, Azure, or Docker) and workflows (such as security auditing or API testing). Installing preset bundles allows teams to instantly equip Copilot with standardized domain expertise and capabilities across projects without having to author every agent or instruction from scratch.
+
 ---
 
 ## 🎭 3. Playwright MCP — Browser Automation from Chat
