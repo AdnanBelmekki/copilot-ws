@@ -1,15 +1,21 @@
 # 03 — Wire the Frontend
 
 **Time:** ~20 minutes  
-**Feature:** Inline completions, chat, `/fix`, component generation, `frontend-engineer` skill
+**Features:** Inline completions, chat, `/fix`, component generation, skills
 
-This is the main frontend task. You'll use Copilot to bring the stub components to life and connect them to the backend API.
+**Learning goals:**
+- See how skills and instructions guide React/TypeScript component generation
+- Practice using inline completions for JSX and hooks
+- Observe how Copilot understands the data flow from types + instructions
+- Learn how to iterate and refine generated components using chat commands
+
+> **Note:** The frontend stubs demonstrate how Copilot generates production-shaped React components. You'll build them to understand how Copilot handles UI, state, and API integration — skills applicable to any React project.
 
 ---
 
 ## 🛠️ Activate the frontend-engineer skill
 
-The **`frontend-engineer`** skill loads React, TypeScript, Tailwind, and API service conventions automatically — but you can also invoke it explicitly. In Copilot Chat, try:
+The **`frontend-engineer`** skill loads React, TypeScript, Tailwind, and API service conventions automatically. In Copilot Chat, try:
 
 ```
 Use the frontend-engineer skill to help me implement ProductCard.tsx
@@ -17,7 +23,7 @@ Use the frontend-engineer skill to help me implement ProductCard.tsx
 
 Or just start asking about components, hooks, TypeScript types, or Tailwind — and the skill will kick in on its own.
 
-> 💡 The skill knows the component structure, the `async`/`await` API pattern, the exact type interfaces, and naming conventions for this project — so Copilot suggestions will fit the codebase right away.
+> 💡 **What this teaches:** Skills enable role-specific personas. This skill makes Copilot think like a React specialist — it knows component patterns, hooks conventions, and type safety rules without manual re-explanation.
 
 ---
 
@@ -140,6 +146,28 @@ Open `frontend/src/pages/CheckoutPage.tsx`. In Chat:
 
 ---
 
+## Step 7 — Validate Your Components with a Custom Prompt
+
+Now that you've built ProductCard, Cart, and CheckoutPage, let's enforce design standards. Select `ProductCard.tsx` and paste this one-time prompt into Copilot Chat:
+
+```
+Review this ProductCard component against the designer skill:
+1. Does it use Tailwind utility classes (no inline styles)?
+2. Are all interactive elements keyboard-accessible?
+3. Does the "Add to Cart" button have a focus ring?
+4. Is there a disabled state with proper styling when stock === 0?
+5. Does the component use the project color palette (violet, emerald, rose)?
+6. Are all images required to have alt text?
+
+Suggest specific CSS class changes if needed.
+```
+
+Make any improvements it suggests.
+
+> 💡 **Key insight:** This detailed review prompt would be useful for every component. In [Part 04](./04-agents-and-skills.md), you'll save it as a reusable file.
+
+---
+
 ## Copilot prompts to try
 
 | Prompt | What it demonstrates |
@@ -149,6 +177,7 @@ Open `frontend/src/pages/CheckoutPage.tsx`. In Chat:
 | `/explain` on a React hook you don't recognise | Learning aid |
 | `/fix` on TypeScript errors | Error recovery |
 | `Format price as EUR currency in TypeScript` | Targeted snippets |
+| Custom component review request (Step 7) | **Prompting for quality** ⭐ |
 
 ---
 

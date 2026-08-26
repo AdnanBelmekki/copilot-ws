@@ -1,15 +1,30 @@
 # 02 — Complete the Backend
 
 **Time:** ~20 minutes  
-**Feature:** Inline completions, `/explain`, `/fix`, `@workspace`, `backend-engineer` skill
+**Features:** Inline completions, `/explain`, `/fix`, `@workspace`, skills
 
-> Don't worry if you haven't written Kotlin before — Copilot has you covered. This part shows how Copilot bridges language and framework gaps.
+**Learning goals:**
+- See how `copilot-instructions.md` and skills guide Copilot's code generation
+- Practice using Copilot chat commands (`/explain`, `/fix`) for code understanding and debugging
+- Observe how `@workspace` enables cross-file understanding
+- Understand how Copilot fills in stubs when context is clear
+
+> **Note:** The backend stubs serve as a realistic vehicle to demonstrate Copilot's capabilities. You'll complete them using Copilot — not to "finish the webshop," but to learn how Copilot assists with full-stack development.
+
+---
+
+## 🛠️ What are Skills? (`.github/skills/`)
+
+A **Skill** is a folder located in `.github/skills/` containing a `SKILL.md` file that packages specialized domain knowledge, architectural patterns, and coding conventions for a specific topic or role.
+
+- **`copilot-instructions.md`** = Always active repository-wide baseline rules.
+- **Skills (`.github/skills/`)** = Modular, on-demand domain expertise. Copilot loads a skill automatically when your prompt or active file matches the skill's description, or when you explicitly ask Copilot to use it.
 
 ---
 
 ## 🛠️ Activate the backend-engineer skill
 
-The **`backend-engineer`** skill loads deeper Kotlin, Spring Boot, and JPA conventions automatically — but you can also invoke it explicitly. In Copilot Chat, try:
+The **`backend-engineer`** skill (`.github/skills/backend-engineer/SKILL.md`) loads deeper Kotlin, Spring Boot, and JPA conventions automatically. In Copilot Chat, try:
 
 ```
 Use the backend-engineer skill to explain how the service layer works in this project.
@@ -17,7 +32,7 @@ Use the backend-engineer skill to explain how the service layer works in this pr
 
 Or just start asking about controllers, services, repositories, or Kotlin — and the skill will kick in on its own.
 
-> 💡 The skill knows the exact class names, layering rules, and REST patterns for this project. It gives Copilot precise context without you having to re-explain the stack each time.
+> 💡 **What this teaches:** Skills are a way to package domain knowledge so Copilot can adopt the right persona for the task. Without manually re-explaining, Copilot understands your backend architecture, naming rules, and patterns.
 
 ---
 
@@ -130,6 +145,28 @@ curl -X POST http://localhost:8080/api/orders \
 
 ---
 
+## Step 7 — Write Tests with a Custom Prompt
+
+Now that the backend is working, let's test it. In Copilot Chat, with `ProductControllerTest.kt` open, paste this one-time prompt:
+
+```
+@backend-engineer Generate a test for POST /api/orders using MockMvc that:
+1. Mocks orderService.createOrder() to return a valid Order
+2. Sends a POST request with valid customer name, email, and items
+3. Asserts the response status is 201 Created
+4. Asserts the response JSON includes order.id, order.customerName, and order.total
+5. Also includes an error case where the service throws an exception
+```
+
+Review the generated test and run it:
+```bash
+cd backend && ./gradlew test
+```
+
+> 💡 **Key insight:** You had to write and copy a detailed prompt. In [Part 04](./04-agents-and-skills.md), you'll turn this kind of prompt into a reusable file.
+
+---
+
 ## Copilot prompts to try
 
 | Prompt | What it demonstrates |
@@ -138,6 +175,7 @@ curl -X POST http://localhost:8080/api/orders \
 | `@workspace How does CORS work here?` | Cross-file awareness |
 | `/fix` on a compile error | Error recovery |
 | `Generate a curl command to test POST /api/orders` | Dev productivity |
+| Custom test-generation prompt (Step 7) | **Prompting for quality** ⭐ |
 
 ---
 

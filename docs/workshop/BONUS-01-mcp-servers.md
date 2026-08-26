@@ -1,89 +1,151 @@
-# BONUS 01 — MCP Servers
+# BONUS 01 — Playwright MCP: Browser Automation & Testing
 
 **Self-paced bonus task**  
-**Feature:** Model Context Protocol (MCP) servers
+**Feature:** Playwright MCP server for end-to-end testing
+
+**Learning goals:**
+- Understand how Model Context Protocol (MCP) servers extend Copilot's capabilities
+- See how Copilot can control external tools (browsers, databases, APIs) via MCP
+- Learn to use MCP for automation, validation, and testing workflows
+- Explore how MCP turns natural language requirements into executable actions
+
+> **Note:** Playwright MCP demonstrates how Copilot can interact with real systems. The testing scenarios are realistic examples of end-to-end validation — a pattern that applies to any web application.
 
 ---
 
-## What is MCP?
+## What is Playwright MCP?
 
-MCP (Model Context Protocol) is an open standard that lets Copilot connect to external tools and data sources — databases, APIs, file systems, and more — directly from chat.
+Playwright MCP is an MCP server that lets Copilot control a real browser, take screenshots, interact with pages, and run test validations — all from chat.
 
-Instead of copying data into the chat window, Copilot calls the MCP server on your behalf.
+**Why it matters:** MCP servers turn Copilot from a code-only assistant into a **full-stack automation platform** that can interact with your running application.
 
 ---
 
-## Pre-configured servers
+## Pre-configured server
 
-Open `.mcp.json` — two servers are already configured:
+Open `.mcp.json` — the Playwright server is pre-configured:
 
 | Server | What it does |
 |--------|-------------|
-| `github` | Read/write your GitHub repository (issues, PRs, code search) |
-| `filesystem` | Read and write files in your workspace |
+| `playwright` | Launch browsers, navigate pages, interact with UI elements, take screenshots, run test assertions |
+| `filesystem` | Read and write files in your workspace (for saving screenshots, reports) |
 
 ---
 
-## Task 1 — GitHub MCP
+## Task 1 — Visual Inspection
 
-With the GitHub MCP server connected, try these prompts:
-
-```
-List all open issues in this repo
-```
+Use Playwright MCP to inspect the application. Make sure the frontend and backend are running, then ask:
 
 ```
-Search the codebase for all files that import from '../services/api'
+Open http://localhost:5173, wait for products to load, take a screenshot, and describe the visible products and controls.
 ```
 
-```
-Create a GitHub issue: "Add search functionality to ProductsPage" with label "enhancement"
-```
+Observe that Copilot can launch a browser, navigate to localhost, inspect the page, and return a screenshot-backed description.
 
 ---
 
-## Task 2 — Add a SQL/JDBC MCP server
+## Task 2 — A Simple User Interaction
 
-Add a server that can query the H2 database directly:
+Use one short flow to learn how browser actions are chained:
 
-1. Install the `mcp-server-jdbc` package (or a compatible SQLite/H2 MCP server):
-   ```bash
-   npm install -g @modelcontextprotocol/server-sqlite
-   ```
+```
+Open http://localhost:5173, wait for products to load, click the first "Add to Cart" button, and report the cart contents.
+```
 
-2. Add it to `.mcp.json`:
-   ```json
-   "sqlite": {
-     "command": "npx",
-     "args": ["-y", "@modelcontextprotocol/server-sqlite", "./webshop.db"]
-   }
-   ```
-   > Note: H2 in-memory mode doesn't persist to a file by default. For this bonus, update `application.yml` to use a file-based H2: `jdbc:h2:file:./webshop`
-
-3. Then ask Copilot:
-   ```
-   Query the database and show me all products with stock below 5
-   ```
-   ```
-   How many orders have been placed today?
-   ```
+This is the basic smoke check. The longer checkout journey appears only in Task 5.
 
 ---
 
-## Task 3 — Filesystem MCP
+## Task 3 — Form Validation
 
-The filesystem server lets Copilot read and modify files without you pasting them:
-
-```
-Read the current copilot-instructions.md and suggest 3 improvements based on the codebase
-```
+Check invalid input without mixing it with a successful checkout flow:
 
 ```
-Find all TODO comments across the project and summarize them
+Open http://localhost:5173/checkout, submit the form with an empty email, and report the validation feedback and console errors.
 ```
+
+Then try one invalid email such as `invalid@` and compare the result. This demonstrates that MCP can validate behavior, not just take screenshots.
 
 ---
 
-## 💡 Key takeaway
+## Task 4 — Visual Regression
 
-MCP turns Copilot from a code assistant into a **context-aware agent** — it can query live data, interact with external systems, and act across your entire toolchain from a single chat window.
+Create one baseline and compare it after a UI change:
+
+```
+Open http://localhost:5173 and save a screenshot as "baseline-products-page.png" in the workspace.
+```
+
+After changing `ProductCard`, ask:
+
+```
+Take a screenshot of the current products page and compare it with "baseline-products-page.png". Report any visible differences.
+```
+
+The filesystem MCP server can be used to save and retrieve the screenshot.
+
+---
+
+## Task 5 — End-to-end Checkout
+
+Now combine several actions into one meaningful workflow:
+
+```
+Execute this workflow and report success or failure at each step:
+1. Open http://localhost:5173
+2. Wait for products to load
+3. Add two products to the cart
+4. Navigate to checkout
+5. Fill in name "Test User" and email "test@webshop.com"
+6. Submit the order
+7. Capture the confirmation
+8. Verify the order through http://localhost:8080/api/orders
+```
+
+This is the advanced flow. It demonstrates multi-step interaction and browser-to-API verification without repeating the basic cart exercise.
+
+---
+
+## Task 6 — Accessibility and Performance
+
+Use Playwright for two focused quality checks:
+
+```
+Open http://localhost:5173/checkout and check keyboard navigation, associated form labels, focus visibility, image alt text, and obvious color-contrast issues. Report each finding.
+```
+
+```
+Open http://localhost:5173 and measure the time until the products page is usable. Report the timing and any console errors.
+```
+
+These checks demonstrate quality validation without suggesting that Playwright MCP is a full load-testing tool.
+
+---
+
+## 💡 Key Capabilities
+
+Playwright MCP handles:
+- **Browser control** — Launch, navigate, and close browsers
+- **Screenshots** — Capture full pages and selected elements
+- **Interactions** — Click, type, submit forms, and scroll
+- **Assertions** — Verify text, elements, states, and URLs
+- **Inspection** — Query DOM content and attributes
+- **Timing** — Measure page and interaction timing
+
+---
+
+## 💡 Workflow Integration
+
+**During development:** Run Task 1 after UI changes for quick visual validation.  
+**During QA:** Use Tasks 3–6 for validation and end-to-end checks.  
+**During debugging:** Repeat the smallest failing task and inspect the page state.  
+**During documentation:** Save screenshots from Task 1 or Task 4.  
+
+---
+
+## Next Steps
+
+Combine Playwright MCP with other tools:
+- Use **Filesystem MCP** (in `.mcp.json`) to save test reports and screenshots
+- Use **Copilot `/tests` command** to auto-generate Playwright test files from your manual testing scenarios
+- Use **Code Review Agent** to validate test coverage of your changes
