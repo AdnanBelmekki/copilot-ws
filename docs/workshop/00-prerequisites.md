@@ -9,7 +9,7 @@
 | Tool | Version | Download |
 |------|---------|----------|
 | Node.js | 20+ | https://nodejs.org |
-| JDK | 21 | https://adoptium.net |
+| JDK | 25 | https://adoptium.net |
 | VS Code **or** IntelliJ IDEA | Latest | See below |
 | GitHub account with Copilot access | — | https://github.com/settings/copilot |
 

@@ -180,7 +180,7 @@ Open `.github/copilot-setup-steps.yml` — this file pre-installs dependencies n
 
 **Current setup includes:**
 - Node.js + npm (for frontend dependencies)
-- JDK 21 (for backend compilation)
+- JDK 25 (for backend compilation)
 - Playwright browsers (for automated testing)
 
 **Try it in Copilot Chat:**
