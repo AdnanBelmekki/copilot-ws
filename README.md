@@ -39,7 +39,7 @@ The **webshop** is a real-world codebase used to demonstrate these features in p
 ## Quick Start
 
 ### Prerequisites
-Node.js 20+, JDK 21, GitHub Copilot access. → [Detailed setup](docs/workshop/00-prerequisites.md)
+Node.js 20+, JDK 25, GitHub Copilot access. → [Detailed setup](docs/workshop/00-prerequisites.md)
 
 ### Run the frontend
 ```bash
