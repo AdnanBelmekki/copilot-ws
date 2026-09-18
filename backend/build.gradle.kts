@@ -35,8 +35,18 @@ dependencies {
 kotlin {
     compilerOptions {
         freeCompilerArgs.add("-Xjsr305=strict")
-        jvmTarget.set(JvmTarget.JVM_25)
+        // Build and run on JDK 25 (toolchain above), but emit JVM 21 bytecode: Spring Boot
+        // 3.3.0's bundled ASM (used for classpath component scanning) can't yet parse the
+        // newer JVM 25 class-file format, which caused ClassFormatException during tests.
+        jvmTarget.set(JvmTarget.JVM_21)
     }
+}
+
+tasks.withType<JavaCompile> {
+    // Keep in sync with the Kotlin jvmTarget above so Gradle doesn't fail on
+    // "Inconsistent JVM-target compatibility" between compileJava and compileKotlin.
+    sourceCompatibility = "21"
+    targetCompatibility = "21"
 }
 
 tasks.withType<Test> {
