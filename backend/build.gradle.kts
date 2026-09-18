@@ -35,7 +35,10 @@ dependencies {
 kotlin {
     compilerOptions {
         freeCompilerArgs.add("-Xjsr305=strict")
-        jvmTarget.set(JvmTarget.JVM_25)
+        // Build and run on JDK 25 (toolchain above), but emit JVM 21 bytecode: Spring Boot
+        // 3.3.0's bundled ASM (used for classpath component scanning) can't yet parse the
+        // newer JVM 25 class-file format, which caused ClassFormatException during tests.
+        jvmTarget.set(JvmTarget.JVM_21)
     }
 }
 
