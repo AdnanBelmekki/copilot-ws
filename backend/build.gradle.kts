@@ -42,6 +42,13 @@ kotlin {
     }
 }
 
+tasks.withType<JavaCompile> {
+    // Keep in sync with the Kotlin jvmTarget above so Gradle doesn't fail on
+    // "Inconsistent JVM-target compatibility" between compileJava and compileKotlin.
+    sourceCompatibility = "21"
+    targetCompatibility = "21"
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
 }
